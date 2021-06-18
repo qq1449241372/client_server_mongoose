@@ -74,6 +74,9 @@ router.get('/part/:id', (req, res) => {
 })
 //删除部件信息
 router.delete('/part/:id', (req, res) => {
-  Part.deleteOne(req.params.id)
+  Part.findByIdAndDelete(req.params.id, (err, result) => {
+    if (err) { return sendResult(err, 400, '删除部件信息失败！') }
+    res.sendResult(result, 200, '删除部件信息成功！')
+  })
 })
-module.exports = router; 
+module.exports = router;

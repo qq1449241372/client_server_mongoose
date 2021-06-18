@@ -7,9 +7,13 @@ const IDSchema = new Schema({
     type: String
   },
   ID_number: {
-    type: String
+    type: String,
+    default: ''
   },
-
+  ID_address: {
+    type: String,
+    default: ''
+  }
 })
 
 module.exports = ID = mongoose.model('ID', IDSchema)
