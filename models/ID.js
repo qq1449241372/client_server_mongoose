@@ -1,4 +1,4 @@
-// 身份证模型表
+// 身份证文档
 const mongoose = require('./db');
 const Schema = mongoose.Schema
 
@@ -13,7 +13,10 @@ const IDSchema = new Schema({
   ID_address: {
     type: String,
     default: ''
-  }
+  },
+  image_name: String,
+  image_url: String,
+  image_size: String,
 })
 
 module.exports = ID = mongoose.model('ID', IDSchema)

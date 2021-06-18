@@ -47,7 +47,8 @@ const partRouter = require('./routes/part');
 app.use('/api', partRouter)
 const deviceRouter = require('./routes/device');
 app.use('/api', deviceRouter)
-
+const uploadRouter = require('./routes/upload');
+app.use('/api', uploadRouter)
 // 监听端口
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
