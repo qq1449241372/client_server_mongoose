@@ -41,15 +41,9 @@ app.use(resExtra)
 //     })
 // );
 // 配置路由
-const userRouter = require('./routes/user');
-app.use('/api', userRouter)
-const partRouter = require('./routes/part');
-app.use('/api', partRouter)
-const deviceRouter = require('./routes/device');
-app.use('/api', deviceRouter)
-const uploadRouter = require('./routes/upload');
-app.use('/api', uploadRouter)
+const routeLoader = require('./routes/loader');
+app.use('/', routeLoader)
 // 监听端口
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
+  console.log(`Client app listening at http://localhost:${port}`)
 })

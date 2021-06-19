@@ -14,7 +14,6 @@ const IDSchema = new Schema({
     type: String,
     default: ''
   },
-  image_name: String,
   image_url: String,
   image_size: String,
 })

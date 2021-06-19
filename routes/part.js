@@ -58,7 +58,6 @@ router.put('/part/:id', (req, res) => {
     part_weight: req.body.part_weight,
   }, (err, result) => {
     if (err) {
-      // console.log(err._message);
       return res.sendResult(err, 400, '添加部件信息失败！')
     }
     res.sendResult(result, 201, '更新部件信息成功！')
@@ -68,14 +67,14 @@ router.put('/part/:id', (req, res) => {
 // 查询部件信息
 router.get('/part/:id', (req, res) => {
   Part.findById(req.params.id, (err, result) => {
-    if (err) { return sendResult(err, 400, '查询部件信息失败！') }
+    if (err) { return res.sendResult(err, 400, '查询部件信息失败！') }
     res.sendResult(result, 200, '查询部件信息成功！')
   })
 })
 //删除部件信息
 router.delete('/part/:id', (req, res) => {
   Part.findByIdAndDelete(req.params.id, (err, result) => {
-    if (err) { return sendResult(err, 400, '删除部件信息失败！') }
+    if (err) { return res.sendResult(err, 400, '删除部件信息失败！') }
     res.sendResult(result, 200, '删除部件信息成功！')
   })
 })

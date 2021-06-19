@@ -18,7 +18,8 @@ router.get('/user', (req, res, next) => {
   }
   if (!req.query.pagesize || req.query.pagesize <= 0) {
     return res.sendResult(null, 400, "pagesize 参数错误")
-  } next();
+  }
+  next();
 },
   // 处理业务逻辑
   function (req, res, next) {
@@ -35,7 +36,7 @@ router.get('/user', (req, res, next) => {
   }
 
 )
-router.post('/user/add', (req, res) => {
+router.post('/user', (req, res) => {
   // 查询用户是否存在?
   User.findOne({ username: req.body.username }, (err, result) => {
     if (err) {
@@ -52,10 +53,9 @@ router.post('/user/add', (req, res) => {
     })
     newUser.save((err, result) => {
       if (err) {
-        //console.log(err);
-        return res.sendResult(null, 400, err._message)
+        return res.sendResult(err, 400, err._message)
       }
-      return res.sendResult(result, 201, '添加用户成功！')
+       res.sendResult(result, 201, '添加用户成功！')
     })
   })
 })
