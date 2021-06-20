@@ -38,10 +38,7 @@ router.post('/part', (req, res) => {
     part_weight: req.body.part_weight,
   })
   newPart.save((err, result) => {
-    if (err) {
-      // console.log(err._message);
-      return res.sendResult(err, 400, '添加部件信息失败！')
-    }
+    if (err) return res.sendResult(err, 400, '添加部件信息失败！')
     res.sendResult(result, 201, '添加部件信息成功！')
   })
 },
