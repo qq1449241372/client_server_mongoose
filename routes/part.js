@@ -36,6 +36,7 @@ router.post('/part', (req, res) => {
     part_width: req.body.part_width,
     part_height: req.body.part_height,
     part_weight: req.body.part_weight,
+    part_codename: req.body.part_codename
   })
   newPart.save((err, result) => {
     if (err) return res.sendResult(err, 400, '添加部件信息失败！')
@@ -53,6 +54,7 @@ router.put('/part/:id', (req, res) => {
     part_width: req.body.part_width,
     part_height: req.body.part_height,
     part_weight: req.body.part_weight,
+    part_codename: req.body.part_codename
   }, (err, result) => {
     if (err) {
       return res.sendResult(err, 400, '添加部件信息失败！')
