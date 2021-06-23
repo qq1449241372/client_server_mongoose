@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const Device = require('../models/Device');
+const Device = require('../models/device');
 // 获取设备列表
 router.get('/device', (req, res, next) => {
   // 验证参数
