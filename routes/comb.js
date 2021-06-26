@@ -3,6 +3,7 @@ const router = express.Router()
 const Comb = require('../models/combination');
 const Part = require('../models/part');
 const _ = require('lodash');
+const logistics = require('../models/logistics');
 // 获取组合列表
 router.get('/comb', (req, res) => {
   if (!req.query.pagenum || req.query.pagenum <= 0) {
@@ -43,23 +44,42 @@ router.post('/comb', (req, res) => {
   let flyjib_length = 0  //副臂长
   let findList = []  //定义部件
   let unfindList = [] //未定义部件
-  // console.log(req.body.comb_mainboom);
-  const promises = req.body.comb_mainboom.map(item => {
+  let validErr = []
+  // 定义需要校验的数据
+  validList = _.concat(req.body.comb_mainboom, req.body.comb_flyjib)
+  console.log(validList);
+  const promises = validList.map(item => {
     return Part.findOne({ part_codename: item })
   })
-  // 进行部件校验
+  /* 进行校验 */
   Promise.all(promises).then(result => {
-    result.filter(Boolean).forEach(item => {
+    console.log(result);
+    result.filter(Boolean).forEach((item, index) => {
+      // 长度校验
       mainboom_length += item.part_type === '1' ? item.part_length : 0
       flyjib_length += item.part_type === '2' ? item.part_length : 0
-      findList.push(item.part_codename)
+      // 校验主杆提交信息
+      if (index < req.body.comb_mainboom.length) {
+        findList.push(item.part_codename)
+        if (item.part_type !== '1') {
+          return validErr.push(`${item.part_codename}不是主杆`)
+        }
+      }
+      // 进行塔杆校验
+      else {
+        findList.push(item.part_codename)
+        if (item.part_type !== '2') {
+          return validErr.push(`${item.part_codename}不是副臂`)
+        }
+      }
     })
-    unfindList = _.difference(req.body.comb_mainboom, findList)
+    unfindList = _.difference(validList, findList)
     console.log(findList, unfindList, mainboom_length, flyjib_length);
   }).catch(err => {
     console.log(err);
   }).then(() => {
     if (!(_.isEmpty(unfindList))) return res.sendResult(unfindList, 400, `${unfindList}部件未定义`)
+    if (!(_.isEmpty(validErr))) return res.sendResult(validErr, 400, `${validErr}`)
     if (mainboom_length != req.body.comb_mainboom_length || flyjib_length != req.body.comb_flyjib_length) {
       return res.sendResult(null, 400, '长度错误，添加组合信息失败')
     }

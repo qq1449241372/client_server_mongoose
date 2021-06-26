@@ -15,10 +15,11 @@ const logisticsSchema = new Schema({
   others: Array,
   created_time: {
     type: Date,
-    default: () => moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
+    // default: () => moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
+    default: Date.now
   }
 })
-logisticsSchema.path('created_time').get(v => {
-  const t = moment(v).utcOffset(8).format
-})
+// logisticsSchema.path('created_time').get(v => {
+//   const t = moment(v).utcOffset(8).format
+// })
 module.exports = Logistics = mongoose.model('logistics', logisticsSchema)
