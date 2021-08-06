@@ -3,7 +3,6 @@ const cors = require("cors");
 const bodyParser = require('body-parser')
 const expressJWT = require("express-jwt");
 const config = require("./config");
-// const multer = require("multer");
 const path = require("path");
 // const upload = multer({ dest: path.join(__dirname, "../uploads") });
 
@@ -40,7 +39,7 @@ app.use(resExtra)
 //         path: [/^\/api/],
 //     })
 // );
-// 配置路由
+// 配置自动解析路由
 const routeLoader = require('./routes/loader');
 app.use('/', routeLoader)
 // 监听端口

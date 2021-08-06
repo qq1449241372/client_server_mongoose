@@ -34,7 +34,6 @@ router.get('/user', (req, res, next) => {
     }).skip(pgnum).limit(pgsize)
 
   }
-
 )
 router.post('/user', (req, res) => {
   // 查询用户是否存在?
@@ -55,7 +54,7 @@ router.post('/user', (req, res) => {
       if (err) {
         return res.sendResult(err, 400, err._message)
       }
-       res.sendResult(result, 201, '添加用户成功！')
+      res.sendResult(result, 201, '添加用户成功！')
     })
   })
 })
