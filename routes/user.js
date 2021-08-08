@@ -1,12 +1,8 @@
 const express = require('express')
+const { result } = require('lodash')
 const router = express.Router()
 const User = require('../models/user')
 
-/*
-$route GET api/login
- @desc 返回的请求json
- @access public
-*/
 router.get('/login', (req, res) => {
   res.send('login')
 })
@@ -22,7 +18,7 @@ router.get('/user', (req, res, next) => {
   next();
 },
   // 处理业务逻辑
-  function (req, res, next) {
+  function (req, res) {
     const pgnum = (req.query.pagenum - 1) * req.query.pagesize
     const pgsize = req.query.pagesize * 1
     User.find({}, (err, result) => {
@@ -32,9 +28,9 @@ router.get('/user', (req, res, next) => {
       }
       res.sendResult(result, 200, "获取用户信息成功！")
     }).skip(pgnum).limit(pgsize)
-
   }
 )
+// 添加用户
 router.post('/user', (req, res) => {
   // 查询用户是否存在?
   User.findOne({ username: req.body.username }, (err, result) => {
@@ -48,15 +44,33 @@ router.post('/user', (req, res) => {
     // 执行添加用户
     const newUser = new User({
       username: req.body.username,
-      password: req.body.password
+      password: req.body.password,
+      role: req.body.role,
     })
     newUser.save((err, result) => {
-      if (err) {
-        return res.sendResult(err, 400, err._message)
-      }
+      if (err) return res.sendResult(err, 400, err._message)
       res.sendResult(result, 201, '添加用户成功！')
     })
   })
 })
-
+// 修改用户
+router.put('/user/:id', (req, res) => {
+  const newUser = new User({
+    username: req.body.username,
+    password: req.body.password,
+    role: req.body.role,
+  })
+  User.findByIdAndUpdate({ _id: req.params.id }, newUser, (err, result) => {
+    if (err) return res.sendResult(err, 400, '修改用户信息失败！')
+    res.sendResult(newUser, 201, '修改用户信息成功！')
+  })
+})
+// 删除用户
+router.delete('/user/:id', (req, res) => {
+  User.findByIdAndDelete(req.params.id, (err, result) => {
+    if (!result) return res.sendResult(null, 400, '用户不存在，无法删除!')
+    if (err) return res.sendResult(err, 400, '删除用户信息失败！')
+    res.sendResult(null, 200, '删除用户信息成功!')
+  })
+})
 module.exports = router

@@ -2,8 +2,10 @@ const express = require('express')
 const cors = require("cors");
 const bodyParser = require('body-parser')
 const expressJWT = require("express-jwt");
-const config = require("./config");
 const path = require("path");
+const jwtConfig = require('./middleware/authrization/jwtConfig');
+// const _ = require('lodash');
+const routerInterceptor = require('./middleware/Interceptor/Interceptor');
 // const upload = multer({ dest: path.join(__dirname, "../uploads") });
 
 // 创建服务器实例对象
@@ -30,16 +32,19 @@ app.use(cors());
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 // 初始化统一响应机制
-const resExtra = require('./modules/resExtra');
+const resExtra = require('./middleware/handleRes/resExtra');
 app.use(resExtra)
 // 配置解析token中间件
-// algorithms: ["HS265"] 6.0.x版本以后需要加上
-// app.use(
-//     expressJWT({ secret: config.jwtSecretKey }).unless({
-//         path: [/^\/api/],
-//     })
-// );
-// 配置自动解析路由
+app.use(expressJWT({
+  secret: jwtConfig.jwtSecretKey
+})
+  .unless({
+    //除了这个地址，其他的URL都需要验证
+    path: ['/login', '/^\/api/']
+  }));
+// 启用路由拦截功能
+app.use(routerInterceptor)
+// 加载自动配置路由
 const routeLoader = require('./routes/loader');
 app.use('/', routeLoader)
 // 监听端口

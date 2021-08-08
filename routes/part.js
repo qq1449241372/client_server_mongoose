@@ -10,7 +10,8 @@ router.get('/part', (req, res, next) => {
   }
   if (!req.query.pagesize || req.query.pagesize <= 0) {
     return res.sendResult(null, 400, "pagesize 参数错误")
-  } next();
+  }
+  next();
 },
   (req, res) => {
     Part.find({}, (err, result) => {
@@ -42,8 +43,7 @@ router.post('/part', (req, res) => {
     if (err) return res.sendResult(err, 400, '添加部件信息失败！')
     res.sendResult(result, 201, '添加部件信息成功！')
   })
-},
-)
+})
 // 更改部件信息
 router.put('/part/:id', (req, res) => {
   Part.updateOne({ _id: req.params.id }, {
@@ -57,9 +57,9 @@ router.put('/part/:id', (req, res) => {
     part_codename: req.body.part_codename
   }, (err, result) => {
     if (err) {
-      return res.sendResult(err, 400, '添加部件信息失败！')
+      return res.sendResult(err, 400, '修改部件信息失败！')
     }
-    res.sendResult(result, 201, '更新部件信息成功！')
+    res.sendResult(result, 201, '修改部件信息成功！')
   })
 })
 

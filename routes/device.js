@@ -15,22 +15,24 @@ router.get('/device', (req, res, next) => {
   (req, res) => {
     const pgnum = (req.query.pagenum - 1) * req.query.pagesize
     const pgsize = req.query.pagesize * 1
-    Device.aggregate([{
-      $lookup: {
-        from: "parts",
-        localField: "device_id",
-        foreignField: "device_id",
-        as: 'parts',
+    Device.aggregate([
+      {
+        $lookup: {
+          from: "parts",
+          localField: "device_id",
+          foreignField: "device_id",
+          as: 'parts',
+        }
+      },
+      {
+        $lookup: {
+          from: "workers",
+          localField: "device_id",
+          foreignField: "device_id",
+          as: 'workers',
+        }
       }
-    },
-    {
-      $lookup: {
-        from: "workers",
-        localField: "device_id",
-        foreignField: "device_id",
-        as: 'workers',
-      }
-    }], (err, result) => {
+    ], (err, result) => {
       if (err) { return res.sendResult(err, 400, '获取设备列表失败') }
       const resultData = {}
       resultData["total"] = result.length

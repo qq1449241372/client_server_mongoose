@@ -10,7 +10,7 @@ files
   })
   .forEach((file, index) => {
     const route = require('./' + file.replace('.js', ''));
-    if (file === 'index.js') {
+    if (file === 'login.js') {
       router.use('/', route)
     } else {
       router.use('/api', route);

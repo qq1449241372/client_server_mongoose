@@ -1,7 +1,8 @@
 const express = require('express')
 const router = express.Router()
-const Role = require('../models/role')
+const Role = require('../models/role');
 
+//获取角色列表
 router.get('/role', (req, res, next) => {
   // 验证参数
   if (!req.query.pagenum || req.query.pagenum <= 0) {
@@ -29,8 +30,11 @@ router.get('/role', (req, res, next) => {
 router.post('/role', (req, res) => {
   const newRole = new Role({
     role_name: req.body.role_name,
-    role_access: req.body.role_access
+    role_intro: req.body.role_intro,
+    role_type: req.body.role_type,
+    role_menus: req.body.role_menus
   })
+  // console.log(newRole);
   newRole.save((err, result) => {
     if (err) return res.sendResult(err, 400, "添加角色信息失败！")
     res.sendResult(result, 201, '添加角色信息成功！')
@@ -38,10 +42,13 @@ router.post('/role', (req, res) => {
 })
 // 修改角色信息
 router.put('/role/:id', (req, res) => {
-  Role.updateOne({ _id: req.params.id }, {
+  const newRole = new Role({
     role_name: req.body.role_name,
-    role_access: req.body.role_access
-  }, (err, result) => {
+    role_intro: req.body.role_intro,
+    role_type: req.body.role_type,
+    role_menus: req.body.role_menus
+  })
+  Role.updateOne({ _id: req.params.id }, newRole, (err, result) => {
     if (err) {
       return res.sendResult(err, 400, '更新角色信息失败！')
     }
