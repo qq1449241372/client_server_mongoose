@@ -1,4 +1,4 @@
-// 工人模型
+// 工人信息模型
 const mongoose = require('./db');
 const Schema = mongoose.Schema
 

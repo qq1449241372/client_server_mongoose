@@ -1,7 +1,6 @@
 const express = require('express')
 const cors = require("cors");
 const bodyParser = require('body-parser')
-const expressJWT = require("express-jwt");
 const path = require("path");
 const jwtConfig = require('./middleware/authrization/jwtConfig');
 // const _ = require('lodash');
@@ -35,13 +34,11 @@ app.use(bodyParser.urlencoded({ extended: true }))
 const resExtra = require('./middleware/handleRes/resExtra');
 app.use(resExtra)
 // 配置解析token中间件
-app.use(expressJWT({
-  secret: jwtConfig.jwtSecretKey
-})
-  .unless({
-    //除了这个地址，其他的URL都需要验证
-    path: ['/login', '/^\/api/']
-  }));
+const expressJWT = require('./middleware/authrization/expressJWT');
+app.use(expressJWT);
+// 配置错误响应功能
+const handleErr = require('./middleware/authrization/handleErr');
+app.use(handleErr)
 // 启用路由拦截功能
 app.use(routerInterceptor)
 // 加载自动配置路由
