@@ -63,10 +63,19 @@ router.put('/part/:id', (req, res) => {
   })
 })
 
-// 查询部件信息
+// 获取部件信息
 router.get('/part/:id', (req, res) => {
   Part.findById(req.params.id, (err, result) => {
-    if (err) { return res.sendResult(err, 400, '查询部件信息失败！') }
+    if (err) { return res.sendResult(err, 400, '获取部件信息失败！') }
+    res.sendResult(result, 200, '查询部件信息成功！')
+  })
+})
+// 查询部件
+router.post('/part/search', (req, res) => {
+  partName = req.body.part_name
+  Part.find({ part_name: { $regex: partName } }, (err, result) => {
+    if (err) return res.sendResult(err, 400, '查询部件信息失败！')
+    if (result.length == 0) return res.sendResult(null, 400, '未查询到该部件')
     res.sendResult(result, 200, '查询部件信息成功！')
   })
 })

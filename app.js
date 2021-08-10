@@ -35,12 +35,12 @@ const resExtra = require('./middleware/handleRes/resExtra');
 app.use(resExtra)
 // 配置解析token中间件
 const expressJWT = require('./middleware/authrization/expressJWT');
-app.use(expressJWT);
+// app.use(expressJWT);
 // 配置错误响应功能
 const handleErr = require('./middleware/authrization/handleErr');
 app.use(handleErr)
 // 启用路由拦截功能
-app.use(routerInterceptor)
+// app.use(routerInterceptor)
 // 加载自动配置路由
 const routeLoader = require('./routes/loader');
 app.use('/', routeLoader)
