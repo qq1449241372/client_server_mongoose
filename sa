@@ -1,0 +1,89 @@
+[33mcommit 537e7d286bad98fd7ee451987efcea87f666f5e7[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31mapi/master[m[33m)[m
+Author: qq1449241372 <496908054@qq.com>
+Date:   Tue Aug 10 17:09:13 2021 +0800
+
+    add part research api
+
+[33mcommit b5582c6ab6e13d758de22de39bbaa86140354dfb[m
+Author: qq1449241372 <496908054@qq.com>
+Date:   Tue Aug 10 12:12:06 2021 +0800
+
+    add err handle增加错误处理
+
+[33mcommit 8ffc45672433659dc0d8edd24a9eec4ab8e35187[m
+Author: Dk <496908054@qq.com>
+Date:   Sun Aug 8 22:57:00 2021 +0800
+
+    add rbac
+
+[33mcommit 388ceb209e1e419484e78034719444762bd373f9[m
+Author: qq1449241372 <496908054@qq.com>
+Date:   Fri Aug 6 17:29:03 2021 +0800
+
+    add role
+
+[33mcommit 2057b07f2e2c9e039d7c7dd879d7bb98d7e88dfa[m
+Author: Dk <496908054@qq.com>
+Date:   Tue Jun 29 01:05:13 2021 +0800
+
+    修改物流添加接口
+
+[33mcommit 29c6479a872eb6d79b18f21beb08e8160f200b47[m
+Author: Dk <496908054@qq.com>
+Date:   Sun Jun 27 23:46:34 2021 +0800
+
+    物流api  更新接口待完善
+
+[33mcommit 0c25166df77dbddf7adeb632d52a2a5c89a6c868[m
+Author: Dk <496908054@qq.com>
+Date:   Sun Jun 27 00:41:57 2021 +0800
+
+    物流接口 主杆+塔臂
+
+[33mcommit 67224ca8b1e3fa523ca4b6bcecd239c1d54aabce[m
+Author: Dk <496908054@qq.com>
+Date:   Wed Jun 23 23:45:12 2021 +0800
+
+    添加了物流api
+
+[33mcommit d25672d6c62ac0833095a3bdbee63ef8b3f53ccc[m
+Author: Dk <496908054@qq.com>
+Date:   Wed Jun 23 00:00:47 2021 +0800
+
+    comb api valid compelete
+
+[33mcommit 14a577b502a24fa21b6e71fce2506bd97f6be5bb[m
+Author: Dk <496908054@qq.com>
+Date:   Tue Jun 22 00:17:31 2021 +0800
+
+    组合验证
+
+[33mcommit 970e7a4c7a97399897243e9385452e7c918bb802[m
+Author: Dk <496908054@qq.com>
+Date:   Mon Jun 21 00:21:42 2021 +0800
+
+    comb api 80%
+
+[33mcommit 57d25732b97dd3618762992ee2e4f89c2371c5bd[m
+Author: Dk <496908054@qq.com>
+Date:   Sat Jun 19 23:33:36 2021 +0800
+
+    worker api complete
+
+[33mcommit f25fe831e34b1d3e836c632041adf7caa0ac2af2[m
+Author: Dk <496908054@qq.com>
+Date:   Fri Jun 18 23:30:04 2021 +0800
+
+    image func20%
+
+[33mcommit 951a9abd7bc3911f330dabeff700c933c041b0ba[m
+Author: qq1449241372 <496908054@qq.com>
+Date:   Fri Jun 18 14:16:52 2021 +0800
+
+    0618 1400
+
+[33mcommit 0bef2808e91eb623b13deed985ddb3d5bb5d8635[m[33m ([m[1;32mdev[m[33m)[m
+Author: Dk <496908054@qq.com>
+Date:   Thu Jun 17 23:57:31 2021 +0800
+
+    Id 10%

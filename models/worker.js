@@ -17,7 +17,7 @@ const workerSchema = new Schema({
   },
   // 操作设备
   device_id: {
-    type: String,
+    type: Number,
   },
 
 })

@@ -4,12 +4,11 @@ const Schema = mongoose.Schema
 
 const deviceSchema = new Schema({
   device_id: {
-    type: String,
+    type: Number,
     required: true
   },
   device_capacity: {
-    type: String,
-
+    type: Number,
   },
   creat_time: {
     type: Date,
