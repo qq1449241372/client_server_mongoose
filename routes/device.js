@@ -39,9 +39,10 @@ router.get('/device', (req, res, next) => {
   ]
   Device.aggregate(flag, (err, result) => {
     if (err) { return res.sendResult(err, 400, '获取设备列表失败') }
-    const resultData = {}
-    resultData["total"] = result.length
-    resultData['devices'] = result
+    const resultData = {
+      count: result.length,
+      list: result
+    }
     // console.log(resultData);
     res.sendResult(resultData, 200, '获取设备列表成功')
   }).skip(pgnum).limit(pgsize)

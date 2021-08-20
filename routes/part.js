@@ -31,8 +31,8 @@ router.get('/part', (req, res, next) => {
       return res.sendResult(err, 400, '获取部件列表失败')
     }
     const resultData = {
-      total: result.length,
-      parts: result
+      count: result.length,
+      list: result
     }
     res.sendResult(resultData, 200, '获取部件列表成功')
   })

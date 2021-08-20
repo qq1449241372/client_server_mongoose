@@ -5,7 +5,7 @@ module.exports = expressJWT({
   secret: jwtConfig.jwtSecretKey
 }).unless({
   // 验证url/method白名单
-  path: ['/login',
+  path: ['/api/login',
     { url: /^\/api/, methods: ['GET'] }
   ]
 })
